@@ -1,0 +1,75 @@
+# =============================================================
+# PROYECTO TRI FUERZA - Laravel + PostgreSQL + pgAdmin + Mailpit
+# Los valores salen de .env (copiar de .env.example)
+# =============================================================
+name: tri_fuerza
+
+services:
+  servidor:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        HOST_UID: ${HOST_UID:-1000}
+        HOST_GID: ${HOST_GID:-1000}
+    image: tri_fuerza/servidor:local
+    container_name: tri_fuerza_servidor
+    ports:
+      - "127.0.0.1:${APP_PORT:-8083}:80"
+      - "127.0.0.1:5173:5173"     # Vite (npm run dev)
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:17
+    container_name: tri_fuerza_postgres
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-root123}
+      POSTGRES_DB: ${DB_DATABASE:-db_proyecto_final}   # se crea sola la primera vez
+      TZ: America/El_Salvador
+      PGTZ: America/El_Salvador
+    ports:
+      - "127.0.0.1:${DB_PORT_HOST:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:9
+    container_name: tri_fuerza_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@example.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+      PGADMIN_LISTEN_ADDRESS: 0.0.0.0   # evita fallos si Docker no tiene IPv6
+    ports:
+      - "127.0.0.1:8087:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Correo de pruebas: lo que Laravel "envía" se ve en http://localhost:8025
+  mailpit:
+    image: axllent/mailpit:v1
+    container_name: tri_fuerza_mailpit
+    ports:
+      - "127.0.0.1:8025:8025"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  pgadmin_data:
