@@ -7,14 +7,14 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8 col-xl-7">
 
-            <h2 class="text-body mb-1">Bienvenido, {{ auth()->user()->username }}</h2>
+            <h1 class="mb-1">Bienvenido, {{ auth()->user()->username }}</h1>
             <p class="text-body-secondary mb-4">Email: {{ auth()->user()->email }}</p>
 
             {{-- ============ 1. EDITAR DATOS ============ --}}
             {{-- Los errores de este formulario llegan en la "bolsa" updateProfileInformation --}}
-            <div class="card shadow-sm border-0 rounded-4 mb-4">
+            <div class="card surface-card mb-4 reveal">
                 <div class="card-body p-4">
-                    <h4 class="card-title mb-3">Mis datos</h4>
+                    <h2 class="h4 card-title mb-3 section-rule">Mis datos</h2>
 
                     <form method="POST" action="{{ route('user-profile-information.update') }}" novalidate>
                         @csrf
@@ -24,7 +24,7 @@
                             <label for="username" class="form-label">Usuario</label>
                             <input type="text" name="username" id="username"
                                 class="form-control @error('username', 'updateProfileInformation') is-invalid @enderror"
-                                value="{{ old('username', auth()->user()->username) }}">
+                                value="{{ old('username', auth()->user()->username) }}" autocomplete="username">
                             @error('username', 'updateProfileInformation')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
@@ -34,7 +34,7 @@
                             <label for="email" class="form-label">Correo electrónico</label>
                             <input type="email" name="email" id="email"
                                 class="form-control @error('email', 'updateProfileInformation') is-invalid @enderror"
-                                value="{{ old('email', auth()->user()->email) }}">
+                                value="{{ old('email', auth()->user()->email) }}" autocomplete="email">
                             @error('email', 'updateProfileInformation')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
@@ -47,9 +47,9 @@
 
             {{-- ============ 2. CAMBIAR CONTRASEÑA ============ --}}
             {{-- Los errores de este formulario llegan en la "bolsa" updatePassword --}}
-            <div class="card shadow-sm border-0 rounded-4 mb-4">
+            <div class="card surface-card mb-4 reveal">
                 <div class="card-body p-4">
-                    <h4 class="card-title mb-3">Cambiar contraseña</h4>
+                    <h2 class="h4 card-title mb-3 section-rule">Cambiar contraseña</h2>
 
                     <form method="POST" action="{{ route('user-password.update') }}" novalidate>
                         @csrf
@@ -59,11 +59,12 @@
                             <label for="current_password" class="form-label">Contraseña actual</label>
                             <div class="input-group">
                                 <input type="password" name="current_password" id="current_password"
-                                    class="form-control @error('current_password', 'updatePassword') is-invalid @enderror">
-                                <span class="input-group-text" style="cursor: pointer;"
-                                    onclick="togglePassword('current_password')">
-                                    <i class="fa fa-eye" id="icon-current_password"></i>
-                                </span>
+                                    class="form-control @error('current_password', 'updatePassword') is-invalid @enderror"
+                                    autocomplete="current-password">
+                                <button type="button" class="password-toggle" data-password-toggle="current_password"
+                                    aria-label="Mostrar contraseña actual" aria-pressed="false">
+                                    <i class="fa-solid fa-eye eye-icon" aria-hidden="true"></i>
+                                </button>
                             </div>
                             @error('current_password', 'updatePassword')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -74,11 +75,12 @@
                             <label for="new_password" class="form-label">Nueva contraseña</label>
                             <div class="input-group">
                                 <input type="password" name="password" id="new_password"
-                                    class="form-control @error('password', 'updatePassword') is-invalid @enderror">
-                                <span class="input-group-text" style="cursor: pointer;"
-                                    onclick="togglePassword('new_password')">
-                                    <i class="fa fa-eye" id="icon-new_password"></i>
-                                </span>
+                                    class="form-control @error('password', 'updatePassword') is-invalid @enderror"
+                                    autocomplete="new-password">
+                                <button type="button" class="password-toggle" data-password-toggle="new_password"
+                                    aria-label="Mostrar nueva contraseña" aria-pressed="false">
+                                    <i class="fa-solid fa-eye eye-icon" aria-hidden="true"></i>
+                                </button>
                             </div>
                             @error('password', 'updatePassword')
                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -88,7 +90,7 @@
                         <div class="mb-3">
                             <label for="new_password_confirmation" class="form-label">Confirmar nueva contraseña</label>
                             <input type="password" name="password_confirmation" id="new_password_confirmation"
-                                class="form-control">
+                                class="form-control" autocomplete="new-password">
                         </div>
 
                         <button type="submit" class="btn btn-success">Cambiar contraseña</button>

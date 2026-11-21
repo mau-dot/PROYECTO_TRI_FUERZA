@@ -5,111 +5,95 @@
 @section('content')
 
 @auth
-    <!-- ================= PANEL DE CONTROL (DASHBOARD PARA USUARIOS) ================= -->
     <div class="container py-4">
-        <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
-            <h2 class="fw-bold text-body">Panel de Control</h2>
-            <span class="badge bg-primary fs-6">Sesión activa</span>
+        <div class="d-flex justify-content-between align-items-end mb-4 mt-2 gap-3 flex-wrap">
+            <div>
+                <p class="eyebrow mb-1">Panel de control</p>
+                <h1 class="mb-0">Hola, {{ auth()->user()->username }}</h1>
+            </div>
+            <span class="badge text-bg-secondary">Sesión activa</span>
         </div>
-        
-        
+
         @if (auth()->user()->is_admin)
-        <div class="mt-3">
-            <!-- El botón usa la etiqueta url nativa de Django para ir al admin -->
-            <a href="{{ url('/admin') }}" class="btn btn-warning">
-                ⚙️ Panel de Administrador (Superadmin)
-            </a>
-        </div>
+            <div class="mb-4">
+                {{-- TODO: habilitar este acceso cuando el panel de administración esté implementado. --}}
+                <button type="button" class="btn btn-outline-secondary" disabled
+                        title="El panel se activará cuando el módulo esté listo">
+                    Panel de administración, próximamente
+                </button>
+            </div>
         @endif
-        
+
         <div class="row g-4">
-            <!-- Tarjeta de Contabilidad -->
-            <div class="col-md-6">
-                <div class="card shadow-sm h-100 border-0 rounded-4">
+            <div class="col-md-6 reveal">
+                <div class="card surface-card h-100">
                     <div class="card-body p-4 d-flex flex-column">
-                        <h4 class="card-title fw-bold text-primary">📊 Módulo de Contabilidad</h4>
-                        <p class="card-text text-muted flex-grow-1 mt-2">
-                            Gestiona el libro diario, genera balances de comprobación y obtén estados financieros precisos en tiempo real.
+                        <p class="eyebrow mb-2">
+                            <i class="fa-solid fa-book-open module-icon me-2" aria-hidden="true"></i>Contabilidad
                         </p>
-                        
-                        <a href="#" class="btn btn-outline-primary mt-3 align-self-start">Ir a Contabilidad</a>
+                        <h2 class="h4 card-title">Libro diario y balances</h2>
+                        <p class="text-muted flex-grow-1 mt-3">
+                            Aquí se registrarán los asientos y se generarán el balance de comprobación y los estados financieros cuando el módulo entre en funcionamiento.
+                        </p>
+                        <span class="badge text-bg-secondary align-self-start mt-3">Próximamente</span>
                     </div>
                 </div>
             </div>
-        
-            <!-- Tarjeta de Economía -->
-            <div class="col-md-6">
-                <div class="card shadow-sm h-100 border-0 rounded-4">
+
+            <div class="col-md-6 reveal">
+                <div class="card surface-card h-100">
                     <div class="card-body p-4 d-flex flex-column">
-                        <h4 class="card-title fw-bold text-success">📈 Módulo de Economía</h4>
-                        <p class="card-text text-muted flex-grow-1 mt-2">
-                            Realiza proyecciones financieras, analiza la rentabilidad y evalúa la viabilidad de tus proyectos de inversión.
+                        <p class="eyebrow mb-2">
+                            <i class="fa-solid fa-chart-line module-icon me-2" aria-hidden="true"></i>Economía
                         </p>
-                        <!-- Nota: Cambiarás href="#" por la URL de tu app de economía cuando la crees -->
-                        <a href="#" class="btn btn-outline-success mt-3 align-self-start">Ir a Economía</a>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Tarjeta de Resumen Estadístico (Mockup) -->
-            <div class="col-12">
-                <div class="card shadow-sm border-0 rounded-4 mt-2 bg-body-tertiary">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4 text-body">Resumen General</h5>
-                        <div class="row text-center">
-                            <div class="col-sm-4 mb-3 mb-sm-0">
-                                <h2 class="fw-bold text-body">0</h2>
-                                <span class="text-muted">Asientos Registrados</span>
-                            </div>
-                            <div class="col-sm-4 mb-3 mb-sm-0">
-                                <h2 class="fw-bold text-body">$0.00</h2>
-                                <span class="text-muted">Total Activos</span>
-                            </div>
-                            <div class="col-sm-4">
-                                <h2 class="fw-bold text-body">0</h2>
-                                <span class="text-muted">Proyectos Evaluados</span>
-                            </div>
-                        </div>
+                        <h2 class="h4 card-title">Evaluación de proyectos</h2>
+                        <p class="text-muted flex-grow-1 mt-3">
+                            Esta sección reunirá las proyecciones y los indicadores VAN y TIR para comparar alternativas de inversión con datos reales.
+                        </p>
+                        <span class="badge text-bg-secondary align-self-start mt-3">Próximamente</span>
                     </div>
                 </div>
             </div>
         </div>
-        
-        @else
-        <!-- ================= LANDING PAGE (VISTA PARA INVITADOS) ================= -->
-        <div class="container p-3">
-            <div class="p-5 mb-4 bg-body-tertiary rounded-4 shadow-sm text-center mt-3 border">
-                <div class="container-fluid py-4">
-                    <h1 class="display-5 fw-bold text-body">Gestión Contable y Económica</h1>
-                    <p class="col-md-8 mx-auto fs-5 text-muted mt-3">
-                        Un sistema integrador diseñado para centralizar tus operaciones financieras. 
-                        Realiza registros contables, genera balances y evalúa la viabilidad de tus proyectos en un solo entorno seguro.
+
+        <div class="card surface-card mt-4 reveal">
+            <div class="card-body p-4">
+                <h2 class="h5 mb-3 section-rule">Resumen general</h2>
+                <p class="text-muted mb-0">
+                    Todavía no hay registros. Este resumen se completará cuando los módulos estén disponibles.
+                </p>
+            </div>
+        </div>
+    </div>
+@else
+    <div class="container py-4">
+        <div class="surface-card p-4 p-md-5 mb-4 text-center reveal">
+            <p class="eyebrow mb-2">IEC · SIC · TPI</p>
+            <h1 class="display-5 hero-title" data-split>Gestión contable y económica</h1>
+            <p class="col-md-8 mx-auto fs-5 text-muted mt-3">
+                Un sistema para centralizar los registros contables y la evaluación de proyectos en un mismo lugar, con acceso por usuario y recuperación de contraseña.
+            </p>
+            <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
+                <a href="{{ route('register') }}" class="btn btn-primary btn-lg px-4" data-magnet>Crear cuenta</a>
+                <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-lg px-4" data-magnet>Iniciar sesión</a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 reveal">
+                <div class="surface-card h-100 p-4 p-md-5">
+                    <h2 class="h3">Precisión contable</h2>
+                    <p class="text-muted mt-3">
+                        El registro en el libro diario alimenta el balance general y el estado de resultados, sin tener que repetir los datos en cada informe.
                     </p>
-                    <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-                        <a href="{{ route('register') }}" class="btn btn-primary btn-lg px-4 shadow-sm">Comenzar ahora</a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-lg px-4">Iniciar sesión</a>
-                    </div>
                 </div>
             </div>
-            
-            <div class="row align-items-md-stretch g-4 mb-4">
-                <!-- Beneficio 1 -->
-                <div class="col-md-6">
-                    <div class="h-100 p-5 bg-body-tertiary border rounded-4 shadow-sm">
-                        <h3 class="fw-bold text-body">Precisión Contable</h3>
-                        <p class="text-muted mt-3">
-                            Automatiza el flujo de tus datos. Desde el ingreso del asiento en el libro diario hasta la generación automática del balance general y estado de resultados, minimizando el error humano.
-                        </p>
-                    </div>
-                </div>
-                <!-- Beneficio 2 -->
-                <div class="col-md-6">
-                    <div class="h-100 p-5 bg-body-tertiary border rounded-4 shadow-sm">
-                        <h3 class="fw-bold text-body">Evaluación Estratégica</h3>
-                        <p class="text-muted mt-3">
-                            Obtén claridad sobre tus inversiones. Calcula indicadores financieros clave como el VAN y la TIR para tomar decisiones estratégicas fundamentadas en datos reales.
-                        </p>
-                    </div>
+            <div class="col-md-6 reveal">
+                <div class="surface-card h-100 p-4 p-md-5">
+                    <h2 class="h3">Evaluación estratégica</h2>
+                    <p class="text-muted mt-3">
+                        Los indicadores VAN y TIR sirven para comparar proyectos de inversión y justificar la decisión con cifras verificables.
+                    </p>
                 </div>
             </div>
         </div>

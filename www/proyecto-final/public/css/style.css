@@ -1,0 +1,458 @@
+/* Sistema Integrador: estilos propios sobre Bootstrap.
+   Paleta: papel cálido y tinta azulada, con un solo acento teja para acciones.
+   Es un sistema contable institucional: el color se usa para decidir, no para decorar.
+   Tipografía: Georgia en los títulos para dar voz de acta; el cuerpo usa la pila del sistema.
+   Movimiento: entrada breve del contenido y feedback de control, sin bucles. */
+
+:root {
+    --paper: #f4f1ea;
+    --surface: #ffffff;
+    --ink: #1b2733;
+    --muted: #54616d;
+    --line: #8c8c86;
+    --hairline: #d8d2c6;
+    --accent: #9a4526;
+    --accent-strong: #7f3820;
+    --accent-on: #ffffff;
+    --accent-rgb: 154, 69, 38;
+    --accent-ring: rgba(154, 69, 38, 0.22);
+    --spotlight: rgba(154, 69, 38, 0.16);
+    --shadow-card: 0 1px 2px rgba(27, 39, 51, 0.08), 0 10px 26px rgba(27, 39, 51, 0.06);
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --dur-press: 120ms;
+    --dur-control: 160ms;
+    --dur-enter: 240ms;
+    --stagger: 60ms;
+    --radius: 10px;
+
+    --bs-body-bg: var(--paper);
+    --bs-body-bg-rgb: 244, 241, 234;
+    --bs-body-color: var(--ink);
+    --bs-body-color-rgb: 27, 39, 51;
+    --bs-secondary-color: var(--muted);
+    --bs-secondary-bg: #ede9e0;
+    --bs-tertiary-bg: var(--paper);
+    --bs-border-color: var(--hairline);
+    --bs-link-color: var(--accent);
+    --bs-link-hover-color: var(--accent-strong);
+    --bs-primary: var(--accent);
+    --bs-primary-rgb: var(--accent-rgb);
+}
+
+:root[data-bs-theme="dark"] {
+    --paper: #111820;
+    --surface: #1a242e;
+    --ink: #e9ede8;
+    --muted: #a9b4bc;
+    --line: #6c7b88;
+    --hairline: #33414e;
+    --accent: #e3a15c;
+    --accent-strong: #f0b978;
+    --accent-on: #111820;
+    --accent-rgb: 227, 161, 92;
+    --accent-ring: rgba(227, 161, 92, 0.24);
+    --spotlight: rgba(227, 161, 92, 0.18);
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.32), 0 12px 30px rgba(0, 0, 0, 0.24);
+
+    --bs-body-bg: var(--paper);
+    --bs-body-bg-rgb: 17, 24, 32;
+    --bs-body-color: var(--ink);
+    --bs-body-color-rgb: 233, 237, 232;
+    --bs-secondary-color: var(--muted);
+    --bs-secondary-bg: #1a242e;
+    --bs-tertiary-bg: #18212a;
+    --bs-border-color: var(--hairline);
+    --bs-link-color: var(--accent);
+    --bs-link-hover-color: var(--accent-strong);
+    --bs-primary: var(--accent);
+    --bs-primary-rgb: var(--accent-rgb);
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand, .display-5 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    letter-spacing: -0.012em;
+}
+
+/* Una sola señal de foco, visible en ambos temas. */
+a, button, summary, select, label[for], input[type="checkbox"], input[type="radio"] {
+    cursor: pointer;
+}
+
+:disabled, [aria-disabled="true"] {
+    cursor: not-allowed;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent) !important;
+    outline-offset: 3px !important;
+    border-radius: 4px;
+}
+
+/* Barra: compacta, con una línea que separa navegación de contenido. */
+.navbar {
+    min-height: 60px;
+    background-color: var(--paper);
+    border-bottom: 1px solid var(--hairline);
+}
+
+.navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.nav-link {
+    color: var(--ink);
+    padding: 0.5rem 0.7rem;
+    border-radius: 6px;
+    transition: color var(--dur-control) ease;
+}
+
+.nav-link[aria-current="page"] {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* El utilitario text-danger de Bootstrap queda en 4,01:1 sobre papel claro.
+   Cerrar sesión es una acción de navegación, no una alerta: usa tinta y el
+   único acento en hover, igual que el resto del menú. */
+nav form button.nav-link {
+    color: var(--ink) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    nav form button.nav-link:hover { color: var(--accent) !important; }
+}
+
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.theme-icon {
+    transition: transform var(--dur-control) var(--ease-out);
+}
+
+.navbar-toggler {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* La tarjeta de acceso es la única superficie elevada: es la tarea del momento. */
+.auth-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+}
+
+.surface-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+}
+
+.card-title {
+    letter-spacing: -0.01em;
+}
+
+.card-body a, .alert a, footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.btn {
+    min-height: 44px;
+    transition: transform var(--dur-press) var(--ease-out),
+                box-shadow var(--dur-press) var(--ease-out),
+                background-color var(--dur-control) ease,
+                border-color var(--dur-control) ease;
+}
+
+.btn:not(:disabled):active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    --bs-btn-color: var(--accent-on);
+    --bs-btn-bg: var(--accent);
+    --bs-btn-border-color: var(--accent);
+    --bs-btn-hover-color: var(--accent-on);
+    --bs-btn-hover-bg: var(--accent-strong);
+    --bs-btn-hover-border-color: var(--accent-strong);
+    --bs-btn-active-color: var(--accent-on);
+    --bs-btn-active-bg: var(--accent-strong);
+    --bs-btn-active-border-color: var(--accent-strong);
+    --bs-btn-disabled-color: var(--accent-on);
+    --bs-btn-disabled-bg: var(--accent);
+    --bs-btn-disabled-border-color: var(--accent);
+}
+
+.form-control, .form-select, .password-toggle {
+    min-height: 44px;
+    color: var(--ink);
+    background-color: var(--surface);
+    border-color: var(--line);
+}
+
+.form-control::placeholder {
+    color: var(--muted);
+    opacity: 1;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+.password-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    color: var(--muted);
+    border-color: var(--line);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.password-toggle:hover {
+    color: var(--accent);
+}
+
+.eye-icon {
+    display: inline-block;
+    transition: opacity var(--dur-control) var(--ease-out),
+                transform var(--dur-control) var(--ease-out);
+}
+
+.password-toggle[aria-pressed="true"] .eye-icon {
+    opacity: 0.72;
+    transform: scale(0.92);
+}
+
+/* Las alertas llegan desde arriba, el mismo eje por el que salen al cerrarse. */
+.alert {
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+}
+
+/* Entrada escalonada de contenido: 240ms, 60ms entre hermanos. */
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes fade-only {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.reveal {
+    animation: rise-in var(--dur-enter) var(--ease-out) both;
+}
+
+.reveal:nth-child(2) { animation-delay: var(--stagger); }
+.reveal:nth-child(3) { animation-delay: calc(var(--stagger) * 2); }
+
+.section-rule {
+    border-top: 1px solid var(--hairline);
+    padding-top: 1.25rem;
+}
+
+.eyebrow {
+    color: var(--muted);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.module-icon {
+    color: var(--accent);
+    font-size: 1.1rem;
+}
+
+/* ---------- Movimiento ----------
+   Cada efecto responde a una acción o guía la lectura. Nada corre en bucle.
+   Todo se apaga con prefers-reduced-motion. */
+
+/* El titular entra palabra por palabra: lleva el ojo a la propuesta de valor. */
+.hero-title .word {
+    display: inline-block;
+    animation: word-in 620ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@keyframes word-in {
+    from { opacity: 0; transform: translateY(14px); filter: blur(6px); }
+    to   { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* Los campos aparecen en orden para que el formulario se lea de arriba abajo. */
+.auth-card form > :not([type="hidden"]) {
+    animation: field-in 360ms var(--ease-out) both;
+    animation-delay: calc(120ms + var(--i, 0) * 45ms);
+}
+
+@keyframes field-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* Ripple: confirma que el clic se registró, en el punto exacto. */
+.btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.22;
+    pointer-events: none;
+    transform: scale(0);
+    animation: ripple-out 520ms ease-out forwards;
+}
+
+@keyframes ripple-out {
+    to { transform: scale(2.8); opacity: 0; }
+}
+
+/* Spotlight y tilt: la tarjeta responde al puntero y confirma que es una superficie. */
+.surface-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 180ms var(--ease-out);
+}
+
+.surface-card.is-tilting {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+
+.surface-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0;
+    background: radial-gradient(
+        260px circle at var(--mx, 50%) var(--my, 50%),
+        var(--spotlight),
+        transparent 70%
+    );
+    transition: opacity 220ms ease;
+    pointer-events: none;
+}
+
+.surface-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .surface-card:hover::before { opacity: 1; }
+}
+
+/* Atracción magnética muy leve: los CTA se sienten físicos, no juguetones. */
+[data-magnet] {
+    transition: transform 200ms var(--ease-out);
+    will-change: transform;
+}
+
+/* La barra se separa del contenido al hacer scroll. */
+.navbar {
+    transition: box-shadow 220ms ease, background-color 220ms ease;
+}
+
+header.is-scrolled .navbar {
+    box-shadow: 0 10px 24px rgba(27, 39, 51, 0.08);
+}
+
+:root[data-bs-theme="dark"] header.is-scrolled .navbar {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Subrayado de navegación: solo escritorio, para no ensuciar el menú móvil. */
+@media (min-width: 992px) {
+    .nav-link { position: relative; }
+
+    .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0.7rem;
+        right: 0.7rem;
+        bottom: 0.25rem;
+        height: 2px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 200ms var(--ease-out);
+    }
+
+    .nav-link:hover::after,
+    .nav-link[aria-current="page"]::after { transform: scaleX(1); }
+}
+
+/* El icono de tema gira al cambiar, como una perilla. */
+.theme-toggle[aria-pressed="true"] .theme-icon {
+    transform: rotate(180deg);
+}
+
+footer {
+    border-top: 1px solid var(--hairline);
+    color: var(--muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .nav-link:hover { color: var(--accent); }
+    .btn:not(:disabled):hover { transform: translateY(-1px); }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .auth-card .card-body { padding: 2rem; }
+    .navbar .container { gap: 0.5rem; }
+}
+
+@media (max-width: 575.98px) {
+    .navbar { min-height: 56px; }
+    .navbar-brand { font-size: 1.05rem; }
+    h1, .display-5 { font-size: clamp(1.5rem, 6.5vw, 2rem); }
+    h2 { font-size: clamp(1.3rem, 5.5vw, 1.65rem); }
+    .card-body { padding: 1.25rem; }
+    .section-rule { padding-top: 1rem; }
+    .nav-link { padding: 0.7rem 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal { animation-name: fade-only; }
+    .reveal:nth-child(2), .reveal:nth-child(3) { animation-delay: 0ms; }
+    .hero-title .word,
+    .auth-card form > :not([type="hidden"]) { animation: none; }
+    .surface-card.is-tilting { transform: none; }
+    .surface-card::before { display: none; }
+    .btn .ripple { display: none; }
+    [data-magnet] { transform: none !important; }
+    .btn, .theme-icon, .eye-icon, .nav-link, .navbar { transition-duration: 1ms; }
+    .btn:hover, .btn:active, .password-toggle[aria-pressed="true"] .eye-icon {
+        transform: none;
+    }
+}

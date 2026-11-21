@@ -14,7 +14,7 @@
 @foreach ($tipos as $clave => $color)
     @if (session($clave))
         <div class="container mt-3">
-            <div class="alert alert-{{ $color }} alert-dismissible fade show" role="alert">
+            <div class="alert alert-{{ $color }} alert-dismissible fade show reveal" role="alert">
                 {{ $codigosFortify[session($clave)] ?? session($clave) }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>

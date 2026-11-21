@@ -1,13 +1,15 @@
 <!-- HEADER -->
 <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-body shadow-sm">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand text-body fw-bold" href="{{ route('home') }}">Sistema Integrador</a>
+            <a class="navbar-brand" href="{{ route('home') }}">Sistema Integrador</a>
 
-            <button id="boton-tema" class="btn btn-outline-secondary me-2">  🌑/☀️ </button>
+            <button id="boton-tema" type="button" class="theme-toggle me-2" aria-pressed="false" aria-label="Usar tema oscuro" title="Tema oscuro">
+                <i class="fa-solid fa-moon theme-icon" aria-hidden="true"></i>
+            </button>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarApp"
-                    aria-controls="navbarApp" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="navbarApp" aria-expanded="false" aria-label="Abrir menú de navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -15,25 +17,15 @@
                 <!-- ENLACES PRINCIPALES (Izquierda) -->
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-body" href="{{ route('home') }}">Inicio</a>
+                        <a class="nav-link" href="{{ route('home') }}" @if (request()->routeIs('home')) aria-current="page" @endif>Inicio</a>
                     </li>
-
-                    @auth
-                        <li class="nav-item ms-lg-3">
-                            {{-- Cambiar "#" por route('contabilidad.dashboard') cuando exista --}}
-                            <a class="nav-link text-primary-emphasis fw-semibold" href="#">Contabilidad</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-body" href="#">Economía</a>
-                        </li>
-                    @endauth
                 </ul>
 
                 <!-- USUARIO / INVITADO (Derecha) -->
                 <ul class="navbar-nav align-items-lg-center">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link text-success-emphasis me-3" href="{{ route('perfil') }}">Hola, {{ auth()->user()->username }}</a>
+                            <a class="nav-link me-3" href="{{ route('perfil') }}" @if (request()->routeIs('perfil')) aria-current="page" @endif>Hola, {{ auth()->user()->username }}</a>
                         </li>
                         <li class="nav-item">
                             {{-- En Laravel el logout es POST (protección CSRF), por eso es un formulario --}}
