@@ -6,12 +6,14 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
+//use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -26,10 +28,21 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            // Sin ->login(): el panel usa el login de Fortify (/login, con usuario).
+            // Si alguien entra a /admin sin sesión, Laravel lo manda a /login
+            // y después de iniciar sesión lo regresa a /admin.
             ->path('admin')
-            ->login()
+            //->login()
+            ->brandName("Sistema Integrador . Admin")
             ->colors([
                 'primary' => Color::Amber,
+            ])
+             ->navigationItems([
+                // Enlace para volver a la aplicación (Bootstrap) desde el panel
+                NavigationItem::make('Volver al sitio')
+                    ->url(fn (): string => route('home'))
+                    ->icon(Heroicon::OutlinedArrowLeftCircle)
+                    ->sort(100),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
@@ -39,7 +52,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
