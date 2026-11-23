@@ -7,11 +7,7 @@
 
 <div class="card border-0 shadow-sm rounded-4" style="max-width: 900px;">
     <div class="card-body p-4">
-        <p class="text-body-secondary">
-            Datos de la empresa real del caso. La <strong>clasificación</strong> define el sistema de costos que se aplicará
-            (requisito 5.1).
-        </p>
-
+        
         <form method="POST" action="{{ route('contabilidad.empresa.update') }}" novalidate>
             @csrf
             @method('PUT')
