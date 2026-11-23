@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Responses\FilamentLogoutResponse;
+use Filament\Auth\Http\Responses\Contracts\LogoutResponse;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // NUEVO (Filament): "Salir" en /admin vuelve al inicio del sitio
+        $this->app->bind(LogoutResponse::class, FilamentLogoutResponse::class);
     }
 
     /**
@@ -19,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        
     }
 }
