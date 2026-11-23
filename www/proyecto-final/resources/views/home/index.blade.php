@@ -16,11 +16,9 @@
 
         @if (auth()->user()->is_admin)
             <div class="mb-4">
-                {{-- TODO: habilitar este acceso cuando el panel de administración esté implementado. --}}
-                <button type="button" class="btn btn-outline-secondary" disabled
-                        title="El panel se activará cuando el módulo esté listo">
-                    Panel de administración, próximamente
-                </button>
+                <a href="{{ route('filament.admin.pages.dashboard') }}" class="btn btn-warning">
+                    <i class="fa-solid fa-gear me-1"></i> Panel de administración
+                </a>
             </div>
         @endif
 
