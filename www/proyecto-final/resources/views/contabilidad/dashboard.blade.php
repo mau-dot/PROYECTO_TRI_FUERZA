@@ -51,8 +51,14 @@
         <div class="card h-100 border-0 shadow-sm rounded-4 tarjeta-dato">
             <div class="card-body">
                 <div class="text-body-secondary small mb-1"><i class="fa-solid fa-scale-balanced me-1"></i>Balanza de comprobación</div>
-                <div class="valor text-body-secondary">—</div>
-                <div class="small text-body-secondary">Disponible en la fase 4</div>
+                                @if ($balanza)
+                    <div class="valor">$ {{ \App\Support\Dinero::formato($balanza['totales']['deudor']) }}</div>
+                    <span class="badge text-bg-{{ $balanza['cuadra'] ? 'success' : 'danger' }}">{{ $balanza['cuadra'] ? 'Cuadra' : 'No cuadra' }}</span>
+                    <a href="{{ route('contabilidad.balanza', ['ajustada' => 1]) }}" class="small ms-1">Ver balanza</a>
+                @else
+                    <div class="valor text-body-secondary">—</div>
+                    <div class="small text-body-secondary">Sin partidas en el periodo</div>
+                @endif
             </div>
         </div>
     </div>
