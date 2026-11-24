@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\TieneEvidencias;
+
 use App\Enums\Naturaleza;
 use App\Enums\Rubro;
 use App\Enums\TipoCuenta;
@@ -14,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['codigo', 'nombre', 'tipo', 'naturaleza', 'rubro', 'activa'])]
 class Cuenta extends Model
 {
+    use TieneEvidencias;
+
     protected $attributes = [
         'activa' => true,
     ];
