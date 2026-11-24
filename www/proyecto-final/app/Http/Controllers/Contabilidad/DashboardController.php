@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Contabilidad;
 use App\Http\Controllers\Controller;
 use App\Models\Empresa;
 use App\Models\Periodo;
+use App\Models\Cuenta;
 
 class DashboardController extends Controller
 {
@@ -12,18 +13,19 @@ class DashboardController extends Controller
     {
         $empresa = Empresa::actual();
         $periodo = Periodo::activo();
+        $numPartidas = $periodo ? $periodo->partidas()->count() : 0;
 
         $avance = [
             ['texto' => 'Empresa registrada y clasificada', 'hecho' => (bool) $empresa, 'fase' => 1],
             ['texto' => 'Periodo contable creado', 'hecho' => (bool) $periodo, 'fase' => 1],
-            ['texto' => 'Catálogo de cuentas', 'hecho' => false, 'fase' => 2],
-            ['texto' => 'Partidas del libro diario (partida doble)', 'hecho' => false, 'fase' => 2],
+            ['texto' => 'Catálogo de cuentas', 'hecho' => Cuenta::exists(), 'fase' => 2],
+            ['texto' => 'Partidas del libro diario (partida doble)', 'hecho' => $numPartidas > 0, 'fase' => 2],
             ['texto' => 'Evidencias de los datos (mínimo 2 fuentes)', 'hecho' => false, 'fase' => 3],
             ['texto' => 'Mayor, balanza, ajustes y hoja de trabajo', 'hecho' => false, 'fase' => 4],
             ['texto' => 'Estados financieros', 'hecho' => false, 'fase' => 4],
             ['texto' => 'Sistema de costos por alternativa', 'hecho' => false, 'fase' => 5],
         ];
 
-        return view('contabilidad.dashboard', compact('empresa', 'periodo', 'avance'));
+        return view('contabilidad.dashboard', compact('empresa', 'periodo', 'avance', 'numPartidas'));
     }
 }
