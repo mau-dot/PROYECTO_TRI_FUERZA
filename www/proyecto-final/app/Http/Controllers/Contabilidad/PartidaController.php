@@ -114,6 +114,7 @@ class PartidaController extends Controller
         $partidas = $periodo
             ? $periodo->partidas()
                 ->with('detalles.cuenta')
+                ->withCount('evidencias')
                 ->when($tipo, fn ($q) => $q->where('tipo', $tipo))
                 ->orderBy('fecha')->orderBy('numero')
                 ->get()
