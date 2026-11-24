@@ -14,6 +14,7 @@
 
 @section('content')
     @php($menu = config("modulos.$modulo"))
+    @php(session(['modulo' => $modulo])) {{-- recuerda el modulo para las pantallas compartidas (Evidencias) --}}
 
     <div class="modulo d-flex">
         {{-- SIDEBAR: fijo en pantallas grandes, panel deslizable (offcanvas) en celular --}}
