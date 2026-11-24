@@ -5,12 +5,12 @@ namespace App\Services\Contabilidad;
 use App\Models\Periodo;
 
 /**
- * Balanza de comprobación: por cada cuenta, el total del debe y del haber (movimientos)
+ * Balanza de comprobacion: por cada cuenta, el total del debe y del haber (movimientos)
  * y su saldo, puesto en la columna deudora o acreedora segun hacia donde quedo.
  * Si la partida doble se respeto, las sumas de las dos columnas de saldos son iguales.
  *
  * $ajustada = false -> antes de ajustes (apertura + diario)
- * $ajustada = true  -> después de ajustes (apertura + diario + ajuste)
+ * $ajustada = true  -> despues de ajustes (apertura + diario + ajuste)
  * $nivel = null -> cuentas de detalle ; 3 -> cuentas de mayor (1101, 2101...)
  */
 class BalanzaComprobacion
