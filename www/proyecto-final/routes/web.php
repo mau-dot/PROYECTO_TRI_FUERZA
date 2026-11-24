@@ -35,6 +35,13 @@ Route::middleware('auth')->group(function () {
         Route::get('ajustes', [Contabilidad\PartidaController::class, 'ajustes'])->name('ajustes.index');
         Route::resource('partidas', Contabilidad\PartidaController::class);
 
+        
+        // reportes contables
+        Route::get('mayor', [Contabilidad\ReporteController::class, 'mayor'])->name('mayor');
+        Route::get('balanza', [Contabilidad\ReporteController::class, 'balanza'])->name('balanza');
+        Route::get('hoja-trabajo', [Contabilidad\ReporteController::class, 'hojaTrabajo'])->name('hoja-trabajo');
+        Route::get('estados-financieros', [Contabilidad\ReporteController::class, 'estados'])->name('estados');
+
     });
 
     // ===== EVIDENCIAS (compartido por los dos modulos) =====
