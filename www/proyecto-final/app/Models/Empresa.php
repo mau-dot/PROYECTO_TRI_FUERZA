@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\TieneEvidencias;
+
 use App\Enums\ClasificacionEmpresa;
 use App\Enums\TamanoEmpresa;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -11,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['nombre', 'nombre_comercial', 'nit', 'nrc', 'giro', 'clasificacion', 'tamano', 'direccion', 'telefono', 'tasa_iva'])]
 class Empresa extends Model
 {
+    use TieneEvidencias;
+    
     protected function casts(): array
     {
         return [

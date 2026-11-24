@@ -54,6 +54,7 @@
                             <td colspan="4">
                                 <a href="{{ route('contabilidad.partidas.show', $p) }}" class="fw-bold text-decoration-none">Partida #{{ $p->numero }}</a>
                                 <span class="badge text-bg-{{ $p->tipo->color() }} ms-1">{{ $p->tipo->label() }}</span>
+                                @include('partials.fuentes', ['n' => $p->evidencias_count])
                             </td>
                             <td class="text-end pe-3 text-nowrap">
                                 <a href="{{ route('contabilidad.partidas.show', $p) }}" class="btn btn-sm btn-outline-secondary" title="Ver"><i class="fa-solid fa-eye"></i></a>

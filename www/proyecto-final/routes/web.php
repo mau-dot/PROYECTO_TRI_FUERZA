@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Contabilidad;
 use App\Http\Controllers\Economia;
+use App\Http\Controllers\EvidenciaController;
 
 /*
 | Rutas de login, registro, logout y recuperacion de contraseña:
@@ -33,7 +34,15 @@ Route::middleware('auth')->group(function () {
         //  libro diario y asientos de ajuste
         Route::get('ajustes', [Contabilidad\PartidaController::class, 'ajustes'])->name('ajustes.index');
         Route::resource('partidas', Contabilidad\PartidaController::class);
+
     });
+
+    // ===== EVIDENCIAS (compartido por los dos modulos) =====
+    Route::post('evidencias/vincular', [EvidenciaController::class, 'vincular'])->name('evidencias.vincular');
+    Route::delete('evidencias/vinculos/{vinculo}', [EvidenciaController::class, 'desvincular'])->name('evidencias.desvincular');
+    Route::get('evidencias/{evidencia}/archivo', [EvidenciaController::class, 'archivo'])->name('evidencias.archivo');
+    Route::resource('evidencias', EvidenciaController::class)->parameters(['evidencias' => 'evidencia']);
+
 
     // ===== MÓDULO DE ECONOMÍA =====
     Route::prefix('economia')->name('economia.')->group(function () {

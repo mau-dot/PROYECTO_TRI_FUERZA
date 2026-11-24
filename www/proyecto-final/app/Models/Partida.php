@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\TieneEvidencias;
+
 use App\Enums\TipoPartida;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['fecha', 'tipo', 'concepto'])]
 class Partida extends Model
 {
+     use TieneEvidencias;
+
     protected function casts(): array
     {
         return [

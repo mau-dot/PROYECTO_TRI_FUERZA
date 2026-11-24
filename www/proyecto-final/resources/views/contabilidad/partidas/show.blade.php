@@ -5,6 +5,7 @@
 
 @section('acciones')
     <a href="{{ route('contabilidad.partidas.index') }}" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i>Libro diario</a>
+    
     @if ($partida->periodo->estaAbierto())
         <a href="{{ route('contabilidad.partidas.edit', $partida) }}" class="btn btn-primary"><i class="fa-solid fa-pen me-1"></i>Editar</a>
     @endif
@@ -57,6 +58,9 @@
         </table>
     </div>
 </div>
+
+
+@include('partials.evidencias', ['modelo' => $partida, 'tipo' => 'partida', 'titulo' => 'Evidencias de esta partida'])
 
 @if ($partida->periodo->estaAbierto())
     <form method="POST" action="{{ route('contabilidad.partidas.destroy', $partida) }}" class="mt-3">
