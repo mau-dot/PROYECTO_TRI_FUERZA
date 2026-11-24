@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Empresa;
 use App\Models\Periodo;
 use App\Models\Cuenta;
+use App\Models\Evidencia;
 
 class DashboardController extends Controller
 {
