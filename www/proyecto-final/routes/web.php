@@ -23,6 +23,16 @@ Route::middleware('auth')->group(function () {
         Route::resource('periodos', Contabilidad\PeriodoController::class)->except('show');
         Route::post('periodos/{periodo}/activar', [Contabilidad\PeriodoController::class, 'activar'])->name('periodos.activar');
         Route::patch('periodos/{periodo}/estado', [Contabilidad\PeriodoController::class, 'cambiarEstado'])->name('periodos.estado');
+
+        
+        //  catalogo de cuentas
+        Route::post('cuentas/cargar-base', [Contabilidad\CuentaController::class, 'cargarBase'])->name('cuentas.cargar-base');
+        Route::patch('cuentas/{cuenta}/estado', [Contabilidad\CuentaController::class, 'cambiarEstado'])->name('cuentas.estado');
+        Route::resource('cuentas', Contabilidad\CuentaController::class)->except('show');
+
+        //  libro diario y asientos de ajuste
+        Route::get('ajustes', [Contabilidad\PartidaController::class, 'ajustes'])->name('ajustes.index');
+        Route::resource('partidas', Contabilidad\PartidaController::class);
     });
 
     // ===== MÓDULO DE ECONOMÍA =====
