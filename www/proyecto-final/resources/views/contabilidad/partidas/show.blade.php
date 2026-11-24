@@ -58,15 +58,4 @@
         </table>
     </div>
 </div>
-
-@if ($partida->periodo->estaAbierto())
-    <form method="POST" action="{{ route('contabilidad.partidas.destroy', $partida) }}" class="mt-3">
-        @csrf
-        @method('DELETE')
-        <button class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Eliminar la partida #{{ $partida->numero }}?')">
-            <i class="fa-solid fa-trash me-1"></i>Eliminar partida
-        </button>
-    </form>
-@endif
-
 @endsection
