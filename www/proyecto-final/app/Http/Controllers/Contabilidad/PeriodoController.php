@@ -69,7 +69,10 @@ class PeriodoController extends Controller
             return $this->cerrado($periodo);
         }
 
-        // aqui se impedira borrar un periodo que ya tenga partidas.
+        if ($periodo->partidas()->exists()) {
+            return back()->with('error', "No se puede eliminar \"{$periodo->nombre}\": ya tiene partidas registradas.");
+        }
+
         $periodo->delete();
 
         if (session(Periodo::SESION) == $periodo->id) {

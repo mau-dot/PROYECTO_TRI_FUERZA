@@ -6,6 +6,7 @@ use App\Enums\EstadoPeriodo;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['nombre', 'fecha_inicio', 'fecha_fin'])]
 class Periodo extends Model
@@ -29,6 +30,12 @@ class Periodo extends Model
     public function empresa(): BelongsTo
     {
         return $this->belongsTo(Empresa::class);
+    }
+
+    
+    public function partidas(): HasMany
+    {
+        return $this->hasMany(Partida::class);
     }
 
     public function estaAbierto(): bool

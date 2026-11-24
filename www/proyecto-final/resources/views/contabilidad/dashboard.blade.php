@@ -42,8 +42,8 @@
         <div class="card h-100 border-0 shadow-sm rounded-4 tarjeta-dato">
             <div class="card-body">
                 <div class="text-body-secondary small mb-1"><i class="fa-solid fa-book-open me-1"></i>Partidas del periodo</div>
-                <div class="valor">0</div>
-                <div class="small text-body-secondary">Disponible en la fase 2</div>
+                <div class="valor">{{ $numPartidas }}</div>
+                <a href="{{ route('contabilidad.partidas.index') }}" class="small">Ver libro diario</a>
             </div>
         </div>
     </div>
