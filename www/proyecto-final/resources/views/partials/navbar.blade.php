@@ -19,6 +19,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}" @if (request()->routeIs('home')) aria-current="page" @endif>Inicio</a>
                     </li>
+                        @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('contabilidad.dashboard') }}" @if (request()->routeIs('contabilidad.*')) aria-current="page" @endif>Contabilidad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('economia.dashboard') }}" @if (request()->routeIs('economia.*')) aria-current="page" @endif>Economía</a>
+                        </li>
+                    @endauth
                 </ul>
 
                 <!-- USUARIO / INVITADO (Derecha) -->

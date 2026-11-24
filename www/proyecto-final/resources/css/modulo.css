@@ -1,0 +1,52 @@
+/* ===== Layout de los módulos (sidebar fijo + contenido) ===== */
+
+.modulo {
+    min-height: calc(100vh - var(--alto-navbar, 56px));
+}
+
+/* En celular el aside no ocupa espacio: el menú sale como panel deslizable */
+.modulo-sidebar {
+    flex-shrink: 0;
+}
+
+@media (min-width: 992px) {
+    .modulo-sidebar {
+        width: 270px;
+        position: sticky;
+        top: var(--alto-navbar, 56px);
+        height: calc(100vh - var(--alto-navbar, 56px));
+        overflow-y: auto;
+        border-right: 1px solid var(--bs-border-color);
+    }
+}
+
+.modulo-contenido {
+    min-width: 0; /* deja que las tablas anchas hagan scroll en vez de romper el layout */
+}
+
+.modulo-nav-seccion {
+    font-size: .72rem;
+    letter-spacing: .06em;
+    font-weight: 600;
+}
+
+.modulo-nav .nav-link {
+    padding: .45rem .75rem;
+    border-radius: .5rem;
+    font-size: .93rem;
+}
+
+.modulo-nav .nav-link:not(.active):not(span):hover {
+    background-color: var(--bs-secondary-bg);
+}
+
+/* Tarjetas de los dashboards */
+.tarjeta-dato .valor {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.modulo-nav .badge {
+    font-size: .6rem;
+    font-weight: 600;
+}

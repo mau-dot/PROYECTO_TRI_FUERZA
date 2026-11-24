@@ -33,7 +33,7 @@
                         <p class="text-muted flex-grow-1 mt-3">
                             Aquí se registrarán los asientos y se generarán el balance de comprobación y los estados financieros cuando el módulo entre en funcionamiento.
                         </p>
-                        <span class="badge text-bg-secondary align-self-start mt-3">Próximamente</span>
+                        <a href="{{ route('contabilidad.dashboard') }}" class="btn btn-outline-primary align-self-start mt-3">Ir a Contabilidad</a>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                         <p class="text-muted flex-grow-1 mt-3">
                             Esta sección reunirá las proyecciones y los indicadores VAN y TIR para comparar alternativas de inversión con datos reales.
                         </p>
-                        <span class="badge text-bg-secondary align-self-start mt-3">Próximamente</span>
+                        <a href="{{ route('economia.dashboard') }}" class="btn btn-outline-primary align-self-start mt-3">Ir a Economía</a>
                     </div>
                 </div>
             </div>
