@@ -109,11 +109,12 @@
     </div>
 </div>
 
-@endsection
-
 @if ($empresa->exists)
     <div style="max-width: 900px;">
         @include('partials.evidencias', ['modelo' => $empresa, 'tipo' => 'empresa', 'campo' => 'autorizacion', 'titulo' => 'Carta de autorización y confidencialidad'])
         @include('partials.evidencias', ['modelo' => $empresa, 'tipo' => 'empresa', 'campo' => 'estados_financieros', 'titulo' => 'Estados financieros o registros existentes'])
     </div>
 @endif
+
+@endsection
+
