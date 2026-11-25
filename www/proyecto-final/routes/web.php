@@ -42,6 +42,15 @@ Route::middleware('auth')->group(function () {
         Route::get('hoja-trabajo', [Contabilidad\ReporteController::class, 'hojaTrabajo'])->name('hoja-trabajo');
         Route::get('estados-financieros', [Contabilidad\ReporteController::class, 'estados'])->name('estados');
 
+        
+        // sistema de costos
+        Route::post('costeos/cargar-ejemplo', [Contabilidad\CosteoController::class, 'cargarEjemplo'])->name('costeos.cargar-ejemplo');
+        Route::post('costeos/{costeo}/elementos', [Contabilidad\CosteoController::class, 'guardarElemento'])->name('costeos.elementos.store');
+        Route::get('costeos/elementos/{elemento}/editar', [Contabilidad\CosteoController::class, 'editarElemento'])->name('costeos.elementos.edit');
+        Route::put('costeos/elementos/{elemento}', [Contabilidad\CosteoController::class, 'actualizarElemento'])->name('costeos.elementos.update');
+        Route::delete('costeos/elementos/{elemento}', [Contabilidad\CosteoController::class, 'eliminarElemento'])->name('costeos.elementos.destroy');
+        Route::resource('costeos', Contabilidad\CosteoController::class);
+
     });
 
     // ===== EVIDENCIAS (compartido por los dos modulos) =====
