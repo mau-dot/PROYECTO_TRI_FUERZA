@@ -7,6 +7,8 @@ use Filament\Auth\Http\Responses\Contracts\LogoutResponse;
 use App\Models\Cuenta;
 use App\Models\Empresa;
 use App\Models\Partida;
+use App\Models\Costeo;
+use App\Models\CosteoElemento;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
             'partida' => Partida::class,
             'empresa' => Empresa::class,
             'cuenta' => Cuenta::class,
+            'costeo' => Costeo::class,                    
+            'costeo_elemento' => CosteoElemento::class,   
         ]);
     }
 }
