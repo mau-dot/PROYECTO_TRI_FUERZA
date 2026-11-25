@@ -8,6 +8,7 @@ use App\Models\Periodo;
 use App\Services\Contabilidad\BalanzaComprobacion;
 use App\Models\Cuenta;
 use App\Models\Evidencia;
+use App\Models\Costeo;
 
 class DashboardController extends Controller
 {
@@ -26,7 +27,7 @@ class DashboardController extends Controller
             ['texto' => 'Evidencias de los datos (mínimo 2 fuentes)', 'hecho' => Evidencia::exists(), 'fase' => 3],
             ['texto' => 'Mayor, balanza, ajustes y hoja de trabajo', 'hecho' => $balanza['cuadra'] ?? false, 'fase' => 4],
             ['texto' => 'Estados financieros', 'hecho' => $balanza['cuadra'] ?? false, 'fase' => 4],
-            ['texto' => 'Sistema de costos por alternativa', 'hecho' => false, 'fase' => 5],
+            ['texto' => 'Sistema de costos por alternativa', 'hecho' => Costeo::count() >= 2, 'fase' => 5],
         ];
 
         return view('contabilidad.dashboard', compact('empresa', 'periodo', 'avance', 'numPartidas', 'balanza',));
