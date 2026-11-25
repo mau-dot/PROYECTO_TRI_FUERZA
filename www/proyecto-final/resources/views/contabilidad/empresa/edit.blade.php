@@ -5,7 +5,7 @@
 
 @section('modulo')
 
-<div class="card border-0 shadow-sm rounded-4" style="max-width: 900px;">
+<div class="card border-0 shadow-sm rounded-4">
     <div class="card-body p-4">
         
         <form method="POST" action="{{ route('contabilidad.empresa.update') }}" novalidate>
@@ -110,7 +110,7 @@
 </div>
 
 @if ($empresa->exists)
-    <div style="max-width: 900px;">
+    <div>
         @include('partials.evidencias', ['modelo' => $empresa, 'tipo' => 'empresa', 'campo' => 'autorizacion', 'titulo' => 'Carta de autorización y confidencialidad'])
         @include('partials.evidencias', ['modelo' => $empresa, 'tipo' => 'empresa', 'campo' => 'estados_financieros', 'titulo' => 'Estados financieros o registros existentes'])
     </div>

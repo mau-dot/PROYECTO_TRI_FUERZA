@@ -12,7 +12,7 @@
 @section('modulo')
 
 @if ($catalogoVacio)
-    <div class="card border-0 shadow-sm rounded-4" style="max-width: 760px;">
+    <div class="card border-0 shadow-sm rounded-4">
         <div class="card-body p-4">
             <h5 class="fw-bold"><i class="fa-solid fa-sitemap me-2"></i>El catálogo está vacío</h5>
             <p class="text-body-secondary">
@@ -30,7 +30,7 @@
         </div>
     </div>
 @else
-    <form method="GET" class="mb-3" style="max-width: 420px;">
+    <form method="GET" class="mb-3">
         <div class="input-group">
             <input type="search" name="buscar" value="{{ $buscar }}" class="form-control" placeholder="Buscar por código o nombre">
             <button class="btn btn-outline-secondary"><i class="fa-solid fa-magnifying-glass"></i></button>

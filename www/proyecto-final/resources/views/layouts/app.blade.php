@@ -28,7 +28,11 @@
 
     @include('partials.navbar')
 
-    @include('partials.alerts')
+    @section('alerts')
+        <div class="container mt-3">
+            @include('partials.alerts')
+        </div>
+    @show
 
     <!-- CONTENIDO DINÁMICO -->
     <main class="container-fluid py-0 px-0 flex-grow-1">

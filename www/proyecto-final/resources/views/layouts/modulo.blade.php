@@ -12,28 +12,35 @@
     <link rel="stylesheet" href="{{ asset('css/modulo.css') }}">
 @endpush
 
+@section('alerts')
+@endsection
+
 @section('content')
     @php($menu = config("modulos.$modulo"))
     @php(session(['modulo' => $modulo])) {{-- recuerda el modulo para las pantallas compartidas (Evidencias) --}}
 
     <div class="modulo d-flex">
         {{-- SIDEBAR: fijo en pantallas grandes, panel deslizable (offcanvas) en celular --}}
-        <aside class="modulo-sidebar bg-body-tertiary">
+        <aside class="modulo-sidebar">
             @include('partials.sidebar', ['menu' => $menu])
         </aside>
 
         {{-- CONTENIDO --}}
         <section class="modulo-contenido flex-grow-1 p-3 p-lg-4">
+            @include('partials.alerts')
+
             <div class="d-flex align-items-center gap-2 mb-4">
                 <button class="btn btn-outline-{{ $menu['color'] }} d-lg-none" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#sidebarModulo" aria-controls="sidebarModulo">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <h3 class="fw-bold mb-0">@yield('titulo_modulo')</h3>
+                <h3 class="fw-bold mb-0 hero-title" data-split>@yield('titulo_modulo')</h3>
                 <div class="ms-auto">@yield('acciones')</div>
             </div>
 
-            @yield('modulo')
+            <div class="modulo-pagina reveal">
+                @yield('modulo')
+            </div>
         </section>
     </div>
 @endsection

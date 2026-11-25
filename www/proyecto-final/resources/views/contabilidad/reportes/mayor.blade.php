@@ -10,7 +10,7 @@
 @section('modulo')
 
 {{-- Selector de cuenta: cualquier cuenta; si es de grupo se juntan sus subcuentas --}}
-<form method="GET" class="d-flex gap-2 mb-3 no-print" style="max-width: 640px;">
+<form method="GET" class="d-flex gap-2 mb-3 no-print">
     <select name="cuenta" class="form-select" onchange="this.form.submit()">
         <option value="">— Todas las cuentas con movimiento —</option>
         @foreach ($cuentas as $c)
