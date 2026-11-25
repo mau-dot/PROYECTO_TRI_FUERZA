@@ -36,6 +36,8 @@ class Vinculo extends Model
             $registro instanceof Partida => "Partida #{$registro->numero} ({$registro->periodo?->nombre})",
             $registro instanceof Cuenta => "Cuenta {$registro->etiqueta()}",
             $registro instanceof Empresa => 'Empresa: '.($registro->nombre_comercial ?: $registro->nombre),
+            $registro instanceof Costeo => "Costeo: {$registro->nombre}",
+            $registro instanceof CosteoElemento => "Costo \"{$registro->concepto}\" ({$registro->costeo?->nombre})",
             $registro === null => "$tipo (eliminado)",
             default => $tipo.' #'.$this->evidenciable_id,
         };
@@ -52,6 +54,8 @@ class Vinculo extends Model
             $this->evidenciable instanceof Partida => route('contabilidad.partidas.show', $this->evidenciable),
             $this->evidenciable instanceof Empresa => route('contabilidad.empresa.edit'),
             $this->evidenciable instanceof Cuenta => route('contabilidad.cuentas.edit', $this->evidenciable),
+            $this->evidenciable instanceof Costeo => route('contabilidad.costeos.show', $this->evidenciable),
+            $this->evidenciable instanceof CosteoElemento => route('contabilidad.costeos.elementos.edit', $this->evidenciable),
             default => null,
         };
     }
