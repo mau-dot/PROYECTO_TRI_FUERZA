@@ -49,14 +49,14 @@ class ModulosFase1Test extends TestCase
         $this->actingAs($user)->get('/contabilidad')
             ->assertOk()
             ->assertSee('Dashboard de Contabilidad')
-            ->assertSee('Libro diario')          // opción futura del menú
-            ->assertSee('Pronto')                // marcada como pendiente
+            ->assertSee('Libro diario')          // opción del menú
             ->assertSee('Registrar empresa');    // aviso: aún no hay empresa
 
         $this->actingAs($user)->get('/economia')
             ->assertOk()
             ->assertSee('Dashboard de Economía')
-            ->assertSee('VPN · TIR · CAUE · B/C');
+            ->assertSee('VPN · TIR · CAUE · B/C')
+            ->assertSee('Pronto');               // opción futura, marcada como pendiente
     }
 
     public function test_el_inicio_enlaza_a_los_dos_modulos(): void
