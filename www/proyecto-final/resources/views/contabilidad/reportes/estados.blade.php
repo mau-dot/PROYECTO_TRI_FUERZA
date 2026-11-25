@@ -40,7 +40,7 @@
     </div>
 @endif
 
-<div class="card border-0 shadow-sm rounded-4 mx-auto" style="max-width: 820px;">
+<div class="card border-0 shadow-sm rounded-4">
     <div class="card-body p-4">
         @if ($estado === 'resultados')
             @include('partials.encabezado-reporte', ['titulo' => 'Estado de resultados', 'subtitulo' => 'Del '.$periodo->rango()])

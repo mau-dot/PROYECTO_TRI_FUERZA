@@ -4,40 +4,246 @@
     min-height: calc(100vh - var(--alto-navbar, 56px));
 }
 
-/* En celular el aside no ocupa espacio: el menú sale como panel deslizable */
 .modulo-sidebar {
-    flex-shrink: 0;
+    background-color: var(--surface);
+}
+
+.modulo-sidebar .offcanvas-lg {
+    background-color: var(--surface);
 }
 
 @media (min-width: 992px) {
+    .modulo {
+        padding-left: 270px;
+    }
+
     .modulo-sidebar {
         width: 270px;
-        position: sticky;
-        top: var(--alto-navbar, 56px);
-        height: calc(100vh - var(--alto-navbar, 56px));
-        overflow-y: auto;
+        position: fixed;
+        z-index: 1010;
+        left: 0;
+        top: var(--alto-navbar, 60px);
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
         border-right: 1px solid var(--bs-border-color);
+    }
+
+    .modulo-sidebar .offcanvas-lg {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+
+    .modulo-sidebar .offcanvas-body {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        min-height: 0;
+        overflow-y: auto;
+    }
+
+    .modulo-contenido {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .modulo-sidebar {
+        width: 0;
+        flex: 0 0 0;
     }
 }
 
 .modulo-contenido {
-    min-width: 0; /* deja que las tablas anchas hagan scroll en vez de romper el layout */
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+}
+
+/* La tarjeta mantiene la paleta de superficies del resto del sistema. */
+.modulo .card {
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card), inset 0 0 0 1px var(--hairline);
+}
+
+.modulo .card .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--ink);
+    --bs-table-border-color: var(--hairline);
+    --bs-table-hover-bg: var(--bs-secondary-bg);
+}
+
+.modulo .card .table thead th {
+    color: var(--muted);
+    background-color: var(--bs-secondary-bg);
+    font-size: .82rem;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.modulo .card .table tfoot > tr > * {
+    background-color: var(--bs-secondary-bg);
+}
+
+.modulo .card .table-responsive {
+    border-radius: inherit;
 }
 
 .modulo-nav-seccion {
-    font-size: .72rem;
-    letter-spacing: .06em;
-    font-weight: 600;
+    color: var(--muted) !important;
+    font-size: .68rem;
+    letter-spacing: .08em;
+    font-weight: 700;
 }
 
 .modulo-nav .nav-link {
-    padding: .45rem .75rem;
-    border-radius: .5rem;
-    font-size: .93rem;
+    min-height: 42px;
+    margin-bottom: .15rem;
+    padding: .55rem .75rem;
+    border-radius: .65rem;
+    font-size: .9rem;
+    font-weight: 500;
+    transition: color var(--dur-control) ease, background-color var(--dur-control) ease;
+}
+
+.modulo-sidebar .modulo-sidebar-head {
+    padding: 1rem .9rem .85rem;
+    border-bottom: 1px solid var(--hairline);
+}
+
+.modulo-sidebar .modulo-sidebar-brand {
+    align-items: center;
+    gap: .65rem;
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.modulo-sidebar-brand-icon {
+    display: inline-grid;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 auto;
+    place-items: center;
+    color: var(--accent);
+    background-color: var(--bs-secondary-bg);
+    border-radius: .6rem;
+}
+
+.modulo-sidebar-context {
+    display: grid;
+    gap: .55rem;
+    margin-top: .9rem;
+}
+
+.modulo-sidebar-context-row {
+    display: flex;
+    min-width: 0;
+    align-items: flex-start;
+    gap: .55rem;
+    color: var(--muted);
+    font-size: .78rem;
+    line-height: 1.4;
+}
+
+.modulo-sidebar-context-row > i {
+    width: 1rem;
+    flex: 0 0 1rem;
+    margin-top: .1rem;
+    color: var(--accent);
+    text-align: center;
+}
+
+.modulo-sidebar-context-value {
+    min-width: 0;
+    flex: 1 1 auto;
+    color: var(--ink);
+}
+
+.modulo-sidebar-context-link {
+    margin-right: .25rem;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.modulo-sidebar-context-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.modulo-sidebar .offcanvas-header {
+    color: var(--ink);
+    background-color: var(--surface);
+}
+
+.modulo-sidebar-mobile-title {
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.modulo-sidebar-mobile-title i {
+    color: var(--accent) !important;
+}
+
+.modulo-nav {
+    padding-top: .35rem !important;
+    padding-bottom: .75rem !important;
+}
+
+.modulo-nav .nav-link::after,
+.modulo-sidebar-footer .nav-link::after {
+    display: none;
 }
 
 .modulo-nav .nav-link:not(.active):not(span):hover {
     background-color: var(--bs-secondary-bg);
+    color: var(--ink);
+}
+
+.modulo-nav .nav-link:not(.active):hover i {
+    color: var(--accent);
+}
+
+.modulo-nav .nav-link.active {
+    box-shadow: inset 3px 0 0 rgba(255, 255, 255, .7);
+}
+
+.modulo-sidebar-footer {
+    padding: .65rem .5rem;
+    border-top: 1px solid var(--hairline);
+    background-color: var(--surface);
+}
+
+.modulo-sidebar-footer .nav-link {
+    min-height: 40px;
+    padding: .5rem .65rem;
+    border-radius: .6rem;
+    font-size: .88rem;
+    font-weight: 500;
+}
+
+.modulo-sidebar .offcanvas-body {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-color: var(--line) transparent;
+    scrollbar-width: thin;
+}
+
+.modulo-sidebar .offcanvas-body::-webkit-scrollbar {
+    width: .4rem;
+}
+
+.modulo-sidebar .offcanvas-body::-webkit-scrollbar-thumb {
+    background-color: var(--line);
+    border-radius: 1rem;
 }
 
 /* Tarjetas de los dashboards */

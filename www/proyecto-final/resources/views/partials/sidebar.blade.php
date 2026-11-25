@@ -5,8 +5,8 @@
 @endphp
 
 <div class="offcanvas-lg offcanvas-start h-100" tabindex="-1" id="sidebarModulo" aria-labelledby="sidebarModuloTitulo">
-    <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title" id="sidebarModuloTitulo">
+    <div class="offcanvas-header border-bottom d-lg-none">
+        <h5 class="offcanvas-title modulo-sidebar-mobile-title" id="sidebarModuloTitulo">
             <i class="{{ $menu['icono'] }} text-{{ $menu['color'] }} me-2"></i>{{ $menu['titulo'] }}
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarModulo" aria-label="Cerrar"></button>
@@ -14,21 +14,31 @@
 
     <div class="offcanvas-body flex-column w-100 p-0">
         {{-- Encabezado: módulo, empresa y periodo activo --}}
-        <div class="px-3 pt-3 pb-2 border-bottom">
-            <a href="{{ route($menu['inicio']) }}" class="d-none d-lg-block text-decoration-none fw-bold fs-5 text-{{ $menu['color'] }}-emphasis">
-                <i class="{{ $menu['icono'] }} me-2"></i>{{ $menu['titulo'] }}
+        <div class="modulo-sidebar-head">
+            <a href="{{ route($menu['inicio']) }}" class="modulo-sidebar-brand d-none d-lg-flex">
+                <span class="modulo-sidebar-brand-icon">
+                    <i class="{{ $menu['icono'] }}" aria-hidden="true"></i>
+                </span>
+                <span>{{ $menu['titulo'] }}</span>
             </a>
-            <div class="small text-body-secondary mt-1 text-truncate" title="{{ $empresa?->nombre }}">
-                <i class="fa-solid fa-store me-1"></i>{{ $empresa?->nombre_comercial ?: $empresa?->nombre ?: 'Empresa sin registrar' }}
-            </div>
-            <div class="small mt-1">
-                <i class="fa-regular fa-calendar me-1 text-body-secondary"></i>
-                @if ($periodoActivo)
-                    <a href="{{ route('contabilidad.periodos.index') }}" class="text-decoration-none" title="Cambiar de periodo">{{ $periodoActivo->nombre }}</a>
-                    <span class="badge text-bg-{{ $periodoActivo->estado->color() }}">{{ $periodoActivo->estado->label() }}</span>
-                @else
-                    <a href="{{ route('contabilidad.periodos.index') }}" class="text-decoration-none text-warning-emphasis">Sin periodo</a>
-                @endif
+            <div class="modulo-sidebar-context">
+                <div class="modulo-sidebar-context-row" title="{{ $empresa?->nombre }}">
+                    <i class="fa-solid fa-store" aria-hidden="true"></i>
+                    <span class="modulo-sidebar-context-value text-truncate">
+                        {{ $empresa?->nombre_comercial ?: $empresa?->nombre ?: 'Empresa sin registrar' }}
+                    </span>
+                </div>
+                <div class="modulo-sidebar-context-row">
+                    <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                    <div class="modulo-sidebar-context-value">
+                        @if ($periodoActivo)
+                            <a href="{{ route('contabilidad.periodos.index') }}" class="modulo-sidebar-context-link" title="Cambiar de periodo">{{ $periodoActivo->nombre }}</a>
+                            <span class="badge text-bg-{{ $periodoActivo->estado->color() }}">{{ $periodoActivo->estado->label() }}</span>
+                        @else
+                            <a href="{{ route('contabilidad.periodos.index') }}" class="modulo-sidebar-context-link text-warning-emphasis">Sin periodo</a>
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -61,7 +71,7 @@
         </nav>
 
         {{-- Cambiar de módulo --}}
-        <div class="border-top p-2">
+        <div class="modulo-sidebar-footer">
             @if ($menu['inicio'] === 'contabilidad.dashboard')
                 <a href="{{ route('economia.dashboard') }}" class="nav-link text-body px-2 py-2"><i class="fa-solid fa-chart-line fa-fw me-2 text-success"></i>Ir a Economía</a>
             @else

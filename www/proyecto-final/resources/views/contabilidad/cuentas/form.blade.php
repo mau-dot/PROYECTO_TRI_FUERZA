@@ -5,7 +5,7 @@
 
 @section('modulo')
 
-<div class="card border-0 shadow-sm rounded-4" style="max-width: 760px;">
+<div class="card border-0 shadow-sm rounded-4">
     <div class="card-body p-4">
         @if ($padre)
             <p class="text-body-secondary">Subcuenta de <strong>{{ $padre->etiqueta() }}</strong>.</p>

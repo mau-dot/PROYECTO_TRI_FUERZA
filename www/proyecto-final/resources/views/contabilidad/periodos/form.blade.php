@@ -6,7 +6,7 @@
 
 @section('modulo')
 
-<div class="card border-0 shadow-sm rounded-4" style="max-width: 640px;">
+<div class="card border-0 shadow-sm rounded-4">
     <div class="card-body p-4">
         <form method="POST" novalidate
               action="{{ $periodo->exists ? route('contabilidad.periodos.update', $periodo) : route('contabilidad.periodos.store') }}">
