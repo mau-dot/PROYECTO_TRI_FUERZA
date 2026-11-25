@@ -38,6 +38,19 @@ return [
             'nombre' => 'Cuenta',
             'campos' => ['' => 'Saldo de la cuenta'],
         ],
+         // -> sistema de costos
+        'costeo' => [
+            'nombre' => 'Costeo',
+            'campos' => ['' => 'Datos de la alternativa'],
+        ],
+        'costeo_elemento' => [
+            'nombre' => 'Costo de una alternativa',
+            'campos' => [
+                '' => 'Todo el costo',
+                'cantidad' => 'Cantidad al año',
+                'costo_unitario' => 'Costo unitario',
+            ],
+        ],
     ],
 
 ];
