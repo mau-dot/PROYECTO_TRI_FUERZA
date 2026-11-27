@@ -51,6 +51,28 @@ return [
                 'costo_unitario' => 'Costo unitario',
             ],
         ],
+
+        // Fase 6: Economía
+        'decision' => [
+            'nombre' => 'Decisión de inversión',
+            'campos' => [
+                '' => 'La decisión',
+                'tmar' => 'TMAR',
+                'tasa_isr' => 'Tasa de ISR',
+            ],
+        ],
+
+        'alternativa' => [
+            'nombre' => 'Alternativa',
+            'campos' => [
+                '' => 'La alternativa',
+                'inversion' => 'Inversión inicial',
+                'vida_util' => 'Vida útil',
+                'valor_salvamento' => 'Valor de salvamento',
+                'beneficio_anual' => 'Beneficio anual',
+            ],
+        ],
+
     ],
 
 ];

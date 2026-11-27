@@ -61,7 +61,29 @@ Route::middleware('auth')->group(function () {
 
 
     // ===== MÓDULO DE ECONOMÍA =====
-    Route::prefix('economia')->name('economia.')->group(function () {
+        Route::prefix('economia')->name('economia.')->group(function () {
+
         Route::get('/', Economia\DashboardController::class)->name('dashboard');
+
+        // Decisión de inversión
+        Route::get('decision', [Economia\DecisionController::class, 'edit'])->name('decision.edit');
+
+        Route::put('decision', [Economia\DecisionController::class, 'update'])->name('decision.update');
+
+        // Alternativas de inversión
+        Route::post('alternativas/cargar-ejemplo', [Economia\AlternativaController::class, 'cargarEjemplo'])->name('alternativas.cargar-ejemplo');
+
+        Route::resource('alternativas', Economia\AlternativaController::class);
+
+        // Flujos de caja
+        Route::get('flujos', [Economia\CalculoController::class, 'flujos'])->name('flujos.index');
+
+        // Factores y equivalencias
+        Route::get('factores', [Economia\CalculoController::class, 'factores'])->name('factores');
+
+        // Depreciación
+        Route::get('depreciacion', [Economia\CalculoController::class, 'depreciacion'])->name('depreciacion');
+
     });
+
 });

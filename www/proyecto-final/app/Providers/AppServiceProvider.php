@@ -11,6 +11,8 @@ use App\Models\Costeo;
 use App\Models\CosteoElemento;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Alternativa;
+use App\Models\Decision;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,9 @@ class AppServiceProvider extends ServiceProvider
             'cuenta' => Cuenta::class,
             'costeo' => Costeo::class,                    
             'costeo_elemento' => CosteoElemento::class,   
+            // Fase 6: Economía
+            'decision' => Decision::class,
+            'alternativa' => Alternativa::class,
         ]);
     }
 }

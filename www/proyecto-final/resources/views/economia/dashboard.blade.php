@@ -25,8 +25,11 @@
         <div class="card h-100 border-0 shadow-sm rounded-4 tarjeta-dato">
             <div class="card-body">
                 <div class="text-body-secondary small mb-1"><i class="fa-solid fa-code-compare me-1"></i>Alternativas</div>
-                <div class="valor">0</div>
-                <div class="small text-body-secondary">Disponible en la fase 6</div>
+                
+                <div class="valor"> {{ $numAlternativas }} </div>
+
+                <a href="{{ route('economia.alternativas.index') }}" class="small"> Ver alternativas </a>
+
             </div>
         </div>
     </div>
@@ -34,8 +37,26 @@
         <div class="card h-100 border-0 shadow-sm rounded-4 tarjeta-dato">
             <div class="card-body">
                 <div class="text-body-secondary small mb-1"><i class="fa-solid fa-percent me-1"></i>TMAR</div>
+                
+            @if ($decision)
+
+                <div class="valor"> {{ rtrim(rtrim(number_format($decision->tmar, 4), '0'), '.') }} % </div>
+
+                <div class="small text-body-secondary"> ISR {{ rtrim(rtrim(number_format($decision->tasa_isr, 2), '0'), '.') }} % 
+                    @if ($decision->provisional)
+                        · <span class="badge text-bg-warning"> Provisional </span>
+                    @endif
+
+                </div>
+
+            @else
+
                 <div class="valor text-body-secondary">—</div>
-                <div class="small text-body-secondary">Disponible en la fase 6</div>
+
+                <a href="{{ route('economia.decision.edit') }}" class="small"> Registrar la decisión </a>
+
+            @endif
+
             </div>
         </div>
     </div>
