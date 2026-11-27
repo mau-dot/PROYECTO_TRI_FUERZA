@@ -67,12 +67,10 @@ Route::middleware('auth')->group(function () {
 
         // Decisión de inversión
         Route::get('decision', [Economia\DecisionController::class, 'edit'])->name('decision.edit');
-
         Route::put('decision', [Economia\DecisionController::class, 'update'])->name('decision.update');
 
         // Alternativas de inversión
         Route::post('alternativas/cargar-ejemplo', [Economia\AlternativaController::class, 'cargarEjemplo'])->name('alternativas.cargar-ejemplo');
-
         Route::resource('alternativas', Economia\AlternativaController::class);
 
         // Flujos de caja
@@ -84,6 +82,17 @@ Route::middleware('auth')->group(function () {
         // Depreciación
         Route::get('depreciacion', [Economia\CalculoController::class, 'depreciacion'])->name('depreciacion');
 
-    });
 
+        // ===== FASE 7: EVALUACIÓN ECONÓMICA =====
+        // Indicadores económicos antes de impuestos.
+        Route::get('indicadores', [Economia\EvaluacionController::class, 'indicadores'])->name('indicadores');
+        // Evaluación después de impuestos.
+        Route::get('impuestos', [Economia\EvaluacionController::class, 'impuestos'])->name('impuestos');
+        // Determinación de la vida económica.
+        Route::get('vida-economica', [Economia\EvaluacionController::class, 'vidaEconomica'])->name('vida-economica');
+        // Análisis de retiro y reemplazo.
+        Route::get('reemplazo', [Economia\EvaluacionController::class, 'reemplazo'])->name('reemplazo');
+        // Comparación de alternativas y análisis incremental.
+        Route::get('comparacion', [Economia\EvaluacionController::class, 'comparacion'])->name('comparacion');
+    });
 });

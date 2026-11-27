@@ -63,11 +63,14 @@ return [
             'Cálculos' => [
                 ['texto' => 'Factores y equivalencias', 'icono' => 'fa-solid fa-percent', 'ruta' => 'economia.factores'],
                 ['texto' => 'Depreciación', 'icono' => 'fa-solid fa-arrow-trend-down', 'ruta' => 'economia.depreciacion'],
-                ['texto' => 'VPN · TIR · CAUE · B/C', 'icono' => 'fa-solid fa-calculator', 'ruta' => 'economia.indicadores'],
-                ['texto' => 'Vida económica y reemplazo', 'icono' => 'fa-solid fa-rotate', 'ruta' => 'economia.reemplazo'],
+                [ 'texto' => 'VPN · TIR · CAUE · B/C', 'icono' => 'fa-solid fa-calculator', 'ruta' => 'economia.indicadores', ],
+                [ 'texto' => 'Después de impuestos', 'icono' => 'fa-solid fa-receipt', 'ruta' => 'economia.impuestos', ],
+                [ 'texto' => 'Vida económica', 'icono' => 'fa-solid fa-clock', 'ruta' => 'economia.vida-economica', ],
+                [ 'texto' => 'Retiro y reemplazo', 'icono' => 'fa-solid fa-rotate', 'ruta' => 'economia.reemplazo', ],
+
             ],
             'Decisión' => [
-                ['texto' => 'Comparación', 'icono' => 'fa-solid fa-ranking-star', 'ruta' => 'economia.comparacion'],
+                ['texto' => 'Comparación de alternativas', 'icono' => 'fa-solid fa-chart-column', 'ruta' => 'economia.comparacion', ],
                 ['texto' => 'Verificación manual', 'icono' => 'fa-solid fa-list-check', 'ruta' => 'economia.verificacion', 'activa' => 'economia.verificacion*'],
                 ['texto' => 'Informe técnico', 'icono' => 'fa-solid fa-print', 'ruta' => 'economia.informe'],
                 ['texto' => 'Evidencias', 'icono' => 'fa-solid fa-paperclip', 'ruta' => 'evidencias.index', 'activa' => 'evidencias.*'],
